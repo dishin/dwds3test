@@ -63,7 +63,7 @@ def index():
 
 			# open s3 bucket, create new Key/file
 			# set the mimetype, content and access control
-			b = s3conn.get_bucket(os.environ.get('WISHBUCKET')) # bucket name defined in .env
+			b = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
 			k = b.new_key(b)
 			k.key = filename
 			k.set_metadata("Content-Type", uploaded_file.mimetype)
@@ -113,7 +113,7 @@ def delete_image(imageid):
 
 		# open s3 bucket, create new Key/file
 		# set the mimetype, content and access control
-		bucket = s3conn.get_bucket(os.environ.get('WISHBUCKET')) # bucket name defined in .env
+		bucket = s3conn.get_bucket(os.environ.get('AWS_BUCKET')) # bucket name defined in .env
 		k = bucket.new_key(bucket)
 		k.key = image.filename
 		bucket.delete_key(k)
