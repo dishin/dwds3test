@@ -1,13 +1,68 @@
-
+ 
 
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
 
-span.label a {
+/*span.label a {
 	color:#fff;
+}*/
+
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*@font-face {
+font-family: ApexBold;
+src: url('/static/fonts/ApexNew-Bold.otf');
+} 
+
+@font-face {
+font-family: ApexBook;
+src: url('/static/fonts/ApexNew-Book.otf');
+} 
+
+@font-face {
+font-family: Apex;
+src: url('/static/fonts/ApexNew-Medium.otf');
+} */
+
+
+
+
+
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:  #7b7c7d;
+	font-size: 1em;
+	
 }
+
+
+h3{
+color: #000000;
+}
+
+a{
+font-size:.7em;
+color:   #e843e3;
+}
+
+a:hover{
+font-size:.7em;
+color:   #e843e3;
+text-decoration:none;
+}
+
+footer{
+font-size:1em;
+color:   #e843e3;
+}
+
+
 
 
 

@@ -162,12 +162,16 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #333333;
-  background-color: #ffffff;
-}
+  color: #333333
+  background-color:#ffffff;
+  background-image: url('/static/img/cork.png');
+
+  }
 
 a {
   color: #0088cc;
+
+         
   text-decoration: none;
 }
 
@@ -620,6 +624,7 @@ cite {
 
 .text-info {
   color: #3a87ad;
+
 }
 
 .text-success {
@@ -918,12 +923,13 @@ legend {
   line-height: 40px;
   color: #333333;
   border: 0;
-  border-bottom: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid #e5e5e5;*/
+  border-bottom: 1px solid  #e843e3;
 }
 
 legend small {
   font-size: 15px;
-  color: #999999;
+  color: ;
 }
 
 label,
@@ -934,7 +940,7 @@ textarea {
   font-size: 14px;
   font-weight: normal;
   line-height: 20px;
-}
+}input
 
 input,
 button,
