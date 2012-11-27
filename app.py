@@ -30,7 +30,7 @@ app.logger.debug("Connecting to MongoLabs")
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 # hardcoded categories for the checkboxes on the form
-#categories = ['GEAR','TECH','FASHION','BODY','ART','RIDE','PLACE']
+categories = ['GEAR','TECH','FASHION','BODY','ART','RIDE','PLACE']
 
 
 # --------- Routes ----------
@@ -79,6 +79,10 @@ def index():
 				submitted_image = models.Image()
 				submitted_image.title = request.form.get('title')
 				submitted_image.description = request.form.get('description')
+
+                
+
+
 				submitted_image.postedby = request.form.get('postedby')
 				submitted_image.filename = filename # same filename of s3 bucket file
 				submitted_image.save()
