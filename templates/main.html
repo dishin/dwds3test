@@ -10,8 +10,10 @@ img {
 {% endblock %}
 {% block body %}
 
-	<div class="row">
-		<div class="span5">
+	
+<div class="row-fluid">
+	<!--<div class="row">-->
+		<div class="span6">
 		    {% if form.errors %}
 		    <ul class="errors">
 		        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
@@ -46,10 +48,61 @@ img {
 			</form>
 		</div>
 
-		<div class="span3">
-			<h2>Images</h2>
+
+
+
+
+<!--add this -->
+<div class="span6">
+
+			<label>Category</label>
+			<span class="help-block">Pick Your Item Category</span>
+
+			
+			{# comment - loop through categories and create checkboxes #}
+			{% for c in categories|sort %}
+			<label class="checkbox">
+			<input type="checkbox" name="categories" value="{{ c|replace(" ","_") }}" {% if c|replace(" ","_") in form.categories.data %}checked=checked{% endif %} > {{ c|title }}
+			</label>
+			{% endfor %}
+
+
+			<!--<button type="submit" class="btn btn">Submit</button>-->
+		</form>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="span12">
+			<h2>Your Wish Item List</h2>
+
 			<hr>
+
+
+<div class="container">
+      	<div class="row-fluid">
+            <ul class="thumbnails">
+
+
+
+
+
 			{% for img in images %}
+
+
+<li class="span3">
+			<div class="thumbnail">
+
+
+
 				<a title="{{img.title}}" alt="Title:{{img.title}}. Description: {{img.description}}" href="https://s3.amazonaws.com/dwd_uploads/{{img.filename}}">
 				<img src="https://s3.amazonaws.com/dwd_uploads/{{img.filename}}" class="img-polaroid"></a>
 				<br>
@@ -62,6 +115,14 @@ img {
 				<hr>
 			{% endfor %}
 		</div>
+
+</li>
+</ul>
+
+
+
+
+
 
 	</div><!-- row -->
 

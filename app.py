@@ -29,6 +29,9 @@ app.logger.debug("Connecting to MongoLabs")
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
+# hardcoded categories for the checkboxes on the form
+#categories = ['GEAR','TECH','FASHION','BODY','ART','RIDE','PLACE']
+
 
 # --------- Routes ----------
 
@@ -125,6 +128,25 @@ def delete_image(imageid):
 
 	else:
 		return "Unable to find requested image in database."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):
