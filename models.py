@@ -44,6 +44,9 @@ class photo_upload_form(photo_form):
 	fileupload = FileField('Upload an image file', validators=[])
 
 
+	
+	
+
 
 
 

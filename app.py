@@ -3,6 +3,8 @@ import os, datetime, re
 from flask import Flask, request, render_template, redirect, abort
 from werkzeug import secure_filename
 
+
+
 # import all of mongoengine
 from flask.ext.mongoengine import mongoengine
 
@@ -134,6 +136,31 @@ def delete_image(imageid):
 
 	else:
 		return "Unable to find requested image in database."
+
+
+
+
+
+
+#addtional 
+@app.route("/", methods=['GET','POST'])
+def thumb():
+	if request.method == "POST":
+		if request.form.get('do') == 'like':
+			like_response.update(inc__likes=1)
+		#if request.form.get('do') == 'dislike':
+			#like_response.update(dec__likes=1)
+		return redirect('/')
+
+
+
+
+
+
+
+
+
+
 
 
 
