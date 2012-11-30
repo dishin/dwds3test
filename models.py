@@ -16,7 +16,9 @@ class Image(mongoengine.Document):
 	description = mongoengine.StringField()
 	postedby = mongoengine.StringField(max_length=120, required=True, verbose_name="Your name")
 	
-	tags = mongoengine.ListField( mongoengine.StringField())
+	# tags = mongoengine.ListField( mongoengine.StringField())
+
+	category = mongoengine.StringField(choices = ( ('ride','Ride'), ('tech','Tech'), ('fashion','Fashion'), ('gear','Gear'), ('place','Place')) )
 
 	filename = mongoengine.StringField()
 
