@@ -113,7 +113,9 @@ img {
 				<img src="https://s3.amazonaws.com/wishbucket/{{img.filename}}" class="img-polaroid"></a>
 				<br>
 				<h3>{{img.title}}</h3>
+				{{img.category}}
 				<p>{{img.description}}
+
 					<br>
 					{{ img.postedby }} - {{ img.timestamp.strftime("%m/%d/%y")}}
 				</p>

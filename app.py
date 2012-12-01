@@ -82,7 +82,7 @@ def index():
 				submitted_image.title = request.form.get('title')
 				submitted_image.description = request.form.get('description')
 
-				submitted_image.category = request.form.get('categories')
+				submitted_image.category = request.form.get('category')
 
                 
 
