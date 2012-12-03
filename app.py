@@ -18,6 +18,9 @@ import boto
 import StringIO
 #from PIL import Image
 
+# create Flask app
+app = Flask(__name__)   # create our flask app
+
 
 app = Flask(__name__)   # create our flask app
 app.secret_key = os.environ.get('SECRET_KEY') # put SECRET_KEY variable inside .env file with a random string of alphanumeric characters
@@ -36,6 +39,82 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 # --------- Routes ----------
+
+
+
+@app.route("/fsq", methods=['GET','POST'])
+def fsqdemo():
+	if request.method == "GET":
+		return render_template('fsq.html')
+
+	elif request.method == "POST":
+
+		user_latlng = request.form.get('user_latlng')
+
+		# Foursquare API endpoint for Venues
+		fsq_url = "https://api.foursquare.com/v2/venues/search"
+
+		# prepare the foursquare query parameters for the Venues Search request
+		# simple example includes lat,long search
+		# we pass in our client id and secret along with 'v', a version date of API.
+		fsq_query = {
+			'll' : user_latlng,
+			'client_id' : os.environ.get('FOURSQUARE_CLIENT_ID'), # info from foursquare developer setting, placed inside .env
+			'client_secret' : os.environ.get('FOURSQUARE_CLIENT_SECRET'),
+			'v' : '20121113' # YYYYMMDD
+		}
+
+		# using Requests library, make a GET request to the fsq_url
+		# pass in the fsq_query dictionary as 'params', this will build the full URL with encoding variables.
+		results = requests.get(fsq_url, params=fsq_query)
+
+		# log out the url that was request
+		app.logger.info("Requested url : %s" % results.url)
+
+		# if we receive a 200 HTTP status code, great! 
+		if results.status_code == 200:
+
+			# get the response, venue array 
+			fsq_response = results.json # .json returns a python dictonary to us.
+			nearby_venues = fsq_response['response']['venues']
+
+			app.logger.info('nearby venues')
+			app.logger.info(nearby_venues)
+
+			# Return raw json for demonstration purposes. 
+			# You would likely use this data in your templates or database in a real app
+			return jsonify(results.json['response'])
+	
+		else:
+
+			# Foursquare API request failed somehow
+			return "uhoh, something went wrong %s" % results.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # this is our main page
 @app.route("/", methods=['GET','POST'])
