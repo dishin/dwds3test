@@ -123,7 +123,7 @@ def fsqdemo():
 
 			}
 			#return jsonify(tacos)
-			return render_template('shopping.html', **templateData)
+			return render_template('main.html', **templateData)
 
 	
 		else:
