@@ -3,9 +3,6 @@ import os, datetime, re
 from flask import Flask, request, render_template, redirect, abort
 from werkzeug import secure_filename
 
-
-
-
 from flask import jsonify
 
 
@@ -48,10 +45,10 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/fsq", methods=['GET','POST'])
 def fsqdemo():
 	if request.method == "GET":
-		return render_template('main.html')
+		return render_template('fsq.html')
 
 	elif request.method == "POST":
 
@@ -123,7 +120,7 @@ def fsqdemo():
 
 			}
 			#return jsonify(tacos)
-			return render_template('main.html', **templateData)
+			return render_template('fsq.html', **templateData)
 
 	
 		else:
