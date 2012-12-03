@@ -48,7 +48,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 @app.route("/fsq", methods=['GET','POST'])
 def fsqdemo():
 	if request.method == "GET":
-		return render_template('fsq.html')
+		return render_template('shopping.html')
 
 	elif request.method == "POST":
 
@@ -119,8 +119,8 @@ def fsqdemo():
 			'venues' : venues
 
 			}
-			#return jsonify(tacos)
-			return render_template('fsq.html', **templateData)
+			#return jsonify(shopping)
+			return render_template('main.html', **templateData)
 
 	
 		else:
