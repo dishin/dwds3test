@@ -3,3 +3,6 @@ Flask-mongoengine
 boto
 
 
+Mongoengine==0.7.5
+unidecode
+requests

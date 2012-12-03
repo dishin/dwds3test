@@ -1,5 +1,6 @@
 {% extends "layout/main.html" %}
 
+
 {% block styles %}
 <style>
 img {
@@ -61,8 +62,35 @@ img {
 <!--add this -->
 <div class="span6">
 
-			<label>Shops</label>
-			<span class="help-block">ZIP CODE</span>
+
+    <label for="user_address">Step #1.<br>Look up Lat/Lng for an address or zipcode.</label>
+    <input type="text" id="user_address" name="user_address" value="721 Broadway, New York NY">
+    <br>
+    <input type="button" id="locate_button" class="btn" value="Locate">
+
+  </div>
+
+<br>
+    <form method="POST">
+      <label for="user_address">Step #2.<br>Send Latitude / Longitude to search.</label>
+      <input type="text" id="user_latlng" name="user_latlng" size="40">
+      <br>
+      <input type="submit" id="search_button" class="btn" value="Search 4SQ" disabled=disabled>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+			<!--<label>Shops</label>
+			<span class="help-block">ZIP CODE</span>-->
 
 			
 			<!--{# comment - loop through categories and create checkboxes #}
@@ -85,11 +113,12 @@ img {
 
 
 
-
+<div class="row-fluid">
 
 		<div class="span12">
 			<h2>Wish Item List</h2>
 
+			
 			<hr>
 
 
@@ -99,7 +128,7 @@ img {
 
 
 
-
+</div>
 
 			{% for img in images %}
 
@@ -135,6 +164,7 @@ img {
 
 		</div>
 
+
 <!--like button-->
 
 
@@ -144,7 +174,8 @@ img {
 
 
 
-			{% endfor %}
+
+		{% endfor %}
 		</div>
 
 </li>
@@ -152,11 +183,79 @@ img {
 
 
 
+</div><!-- row -->
 
-
-
-	</div><!-- row -->
 
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+
+<!--addtional-->
+
+
+
+{% block scripts %}
+<!--
+	Google Maps API
+	https://developers.google.com/maps/documentation/javascript/tutorial
+
+	Get API Key here >> https://code.google.com/apis/console/b/0/
+	Put API Key in line below
+
+--> 
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQsmkT26JbAduQgEDzrtBaIjStLou_z3c&sensor=false"></script>-->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU1fE5CKCqkzAHn61AhCIazqLCnbuWcCw&sensor=false"></script>
+
+<!--
+Google Geocoding Javascript API
+https://developers.google.com/maps/documentation/javascript/geocoding
+-->
+<script>
+  var geocoder;
+  var google_location;
+
+  // when html dom is ready, run this code  
+  jQuery(document).ready(function(){
+
+      // initialize google geocoder
+      geocoder = new google.maps.Geocoder();
+
+      // locate button click event
+      jQuery('#locate_button').click(codeAddress);
+      
+  });
+
+  var codeAddress = function(){
+    var address = jQuery('#user_address').val();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+
+        console.log("received geo info from Google");
+        console.log(results);
+        console.log(results[0].geometry.location);
+        
+        google_location = results[0].geometry.location;
+        latlng_str = google_location.lat() + "," + google_location.lng();
+        console.log(latlng_str);
+
+        jQuery('#user_latlng').val(latlng_str);
+        jQuery('#search_button').removeAttr('disabled');
+
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
