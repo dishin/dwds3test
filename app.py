@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 import os, datetime, re
-from flask import Flask, request, render_template, redirect, abort, jsonify
+from flask import Flask, request, render_template, redirect, abort
 from werkzeug import secure_filename
 
-from unidecode import unidecode
+
+
+
+from flask import jsonify
 
 
 # import all of mongoengine
@@ -18,6 +21,8 @@ import boto
 # Python Image Library
 import StringIO
 #from PIL import Image
+
+
 
 # create Flask app
 app = Flask(__name__)   # create our flask app
@@ -46,7 +51,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 @app.route("/fsq", methods=['GET','POST'])
 def fsqdemo():
 	if request.method == "GET":
-		return render_template('main.html')
+		return render_template('fsq.html')
 
 	elif request.method == "POST":
 
@@ -60,10 +65,19 @@ def fsqdemo():
 		# we pass in our client id and secret along with 'v', a version date of API.
 		fsq_query = {
 			'll' : user_latlng,
+			'query': 'shopping',
 			'client_id' : os.environ.get('FOURSQUARE_CLIENT_ID'), # info from foursquare developer setting, placed inside .env
 			'client_secret' : os.environ.get('FOURSQUARE_CLIENT_SECRET'),
 			'v' : '20121113' # YYYYMMDD
 		}
+
+
+
+
+
+
+
+
 
 		# using Requests library, make a GET request to the fsq_url
 		# pass in the fsq_query dictionary as 'params', this will build the full URL with encoding variables.
@@ -84,12 +98,46 @@ def fsqdemo():
 
 			# Return raw json for demonstration purposes. 
 			# You would likely use this data in your templates or database in a real app
-			return jsonify(results.json['response'])
+			
+
+			#return jsonify(results.json['response'])
+	
+		#else:
+
+			# Foursquare API request failed somehow
+			#return "uhoh, something went wrong %s" % results.json
+
+
+
+
+			# Return raw json for demonstration purposes. 
+			# You would likely use this data in your templates or database in a real app
+			
+			shopping = results.json['response']
+			venues = shopping.get('venues')
+
+			
+			templateData = {
+
+			'venues' : venues
+
+			}
+			#return jsonify(tacos)
+			return render_template('shopping.html', **templateData)
+
 	
 		else:
 
 			# Foursquare API request failed somehow
 			return "uhoh, something went wrong %s" % results.json
+
+
+
+
+
+
+
+
 
 
 
