@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os, datetime, re
-from flask import Flask, request, render_template, redirect, abort
+from flask import Flask, request, render_template, redirect, abort, jsonify
 from werkzeug import secure_filename
+
 
 
 
