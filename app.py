@@ -5,6 +5,7 @@ from werkzeug import secure_filename
 
 from flask import jsonify
 
+ 
 
 # import all of mongoengine
 from flask.ext.mongoengine import mongoengine
@@ -46,7 +47,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 @app.route("/fsq", methods=['GET','POST'])
-def fsqdemo():
+def main():
 	if request.method == "GET":
 		return render_template('shopping.html')
 
