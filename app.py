@@ -3,7 +3,7 @@ import os, datetime, re
 from flask import Flask, request, render_template, redirect, abort, jsonify
 from werkzeug import secure_filename
 
-
+from unidecode import unidecode
 
 
 # import all of mongoengine
