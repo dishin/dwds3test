@@ -12,9 +12,9 @@ class Comment(mongoengine.EmbeddedDocument):
 
 class Image(mongoengine.Document):
 
-	title = mongoengine.StringField(max_length=120, required=True)
+	title = mongoengine.StringField(max_length=120)
 	description = mongoengine.StringField()
-	postedby = mongoengine.StringField(max_length=120, required=True, verbose_name="Your name")
+	postedby = mongoengine.StringField(max_length=120, verbose_name="Your name")
 	
 	# tags = mongoengine.ListField( mongoengine.StringField())
 
