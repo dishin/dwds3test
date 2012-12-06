@@ -43,6 +43,8 @@ img {
 				<br><br>
 				{{ form.category }}
 
+        <span id="venueListContainer"></span>
+
 				{{ form.postedby.label }}
 				{{ form.postedby }}
 				<br>
@@ -71,16 +73,65 @@ img {
     <article>
       <p>Find Where Your Stuffs Are: <span id="status">checking...</span></p>
     </article>
+<script src="/static/js/vendor/jquery-1.8.1.min.js"></script>
+
+
 <script>
+
+jQuery(function() {
 function success(position) {
   var s = document.querySelector('#status');
-  
+  console.log(position.coords.latitude, position.coords.longitude)
+  $.ajax({
+    type : 'GET',
+    dataType : 'json',
+  	url: "/fsq", // put foursquare api url here? question for John
+    data : { latlng : position.coords.latitude + "," + position.coords.longitude},
+
+    success : function(fsqdata) {
+      console.log("success!");
+      console.log(fsqdata.venues);
+
+      buildVenueSelectList(fsqdata.venues)
+
+    }, 
+
+    error : function(err) {
+      console.error("something went wrong");
+      console.error(err);
+
+    }
+
+  }).done(function(data) {
+  	// do something with the information here.
+  		//console.log(data);
+  })
   if (s.className == 'success') {
     // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
     return;
   }
 
- s.innerHTML = "!";
+
+function buildVenueSelectList(data) {
+  console.log("inside buildingvenueselectlist");
+
+  var htmlOptions = "";
+
+  for(var i=0; i<data.length; i++ ) {
+    var venue = data[i];
+    htmlOptions += "<option value='"+venue.name+"'>"+ venue.name +"</option>"; // builds all the option tags
+    console.log(venue.name + " " + venue.location.address);
+  }
+
+  // make <SELECT>
+  var selectHTML = "<select name='venue' id='venuelist'>"+htmlOptions+"</select>"; // builds html <select> tag including htmlOptions.
+  console.log(selectHTML);
+
+  jQuery('#venueListContainer').html(selectHTML); // insert into html document.
+
+}
+
+ s.innerHTML = "	!";
   s.className = 'success';
   
   var mapcanvas = document.createElement('div');
@@ -114,12 +165,14 @@ function error(msg) {
   
   // console.log(arguments);
 }
+	// immediately on page load, if geolocation exists get the location, send the result to success()
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(success, error);  
+	} else {
+	  error('not supported');
+	}
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(success, error);
-} else {
-  error('not supported');
-}
+});
 </script>
 </div>
 
@@ -220,13 +273,52 @@ if (navigator.geolocation) {
 				<img src="https://s3.amazonaws.com/wishbucket/{{img.filename}}" class="img-polaroid"></a>
 				<br>
 				<h3>{{img.title}}</h3>
+
+        {{img.venue}}
+
 				{{img.category}}
+
 				<p>{{img.description}}
 
 					<br>
 					{{ img.postedby }} - {{ img.timestamp.strftime("%m/%d/%y")}}
 				</p>
 				<a href="/delete/{{img.id}}" class="btn btn">delete</a>
+
+
+
+
+
+
+				<!--add this -->
+<!--<div class="span6">
+
+
+    <label for="user_address">Where I Am<br></label>
+    <input type="text" id="user_address" name="user_address" value="zipcode">
+    <br>
+    <input type="button" id="locate_button" class="btn" value="Locate">
+
+  </div>
+
+<br>
+
+<div class="span6">
+    <form method="POST">
+      <label for="user_address">Find Shopping Places<br></label>
+      <input type="text" id="user_latlng" name="user_latlng" size="40">
+      <br>
+      <input type="submit" id="search_button" class="btn" value="Search 4SQ" disabled=disabled>
+    </form>
+
+</div>
+
+
+</div>-->
+
+
+
+
 
 
 

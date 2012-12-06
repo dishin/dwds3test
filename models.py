@@ -20,6 +20,8 @@ class Image(mongoengine.Document):
 
 	category = mongoengine.StringField(choices = ( ('ride','Ride'), ('tech','Tech'), ('fashion','Fashion'), ('gear','Gear'), ('place','Place')) )
 
+	venue = mongoengine.StringField()
+
 	filename = mongoengine.StringField()
 
 	# Comments is a list of Document type 'Comments' defined above

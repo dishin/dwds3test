@@ -20,7 +20,7 @@ import boto
 import StringIO
 #from PIL import Image
 
-
+import requests
 
 # create Flask app
 app = Flask(__name__)   # create our flask app
@@ -49,11 +49,9 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 @app.route("/fsq", methods=['GET','POST'])
 def main():
 	if request.method == "GET":
-		return render_template('main.html')
 
-	elif request.method == "POST":
 
-		user_latlng = request.form.get('user_latlng')
+		user_latlng = request.args.get('latlng')
 
 		# Foursquare API endpoint for Venues
 		fsq_url = "https://api.foursquare.com/v2/venues/search"
@@ -63,12 +61,11 @@ def main():
 		# we pass in our client id and secret along with 'v', a version date of API.
 		fsq_query = {
 			'll' : user_latlng,
-			'query': 'car',
 			'client_id' : os.environ.get('FOURSQUARE_CLIENT_ID'), # info from foursquare developer setting, placed inside .env
 			'client_secret' : os.environ.get('FOURSQUARE_CLIENT_SECRET'),
 			'v' : '20121113' # YYYYMMDD
 		}
-
+		# 'query': 'shopping',
 
 
 
@@ -98,36 +95,38 @@ def main():
 			# You would likely use this data in your templates or database in a real app
 			
 
-			#return jsonify(results.json['response'])
-	
-		#else:
-
-			# Foursquare API request failed somehow
-			#return "uhoh, something went wrong %s" % results.json
-
-
-
-
-			# Return raw json for demonstration purposes. 
-			# You would likely use this data in your templates or database in a real app
-			
-			shopping = results.json['response']
-			venues = shopping.get('venues')
-
-			
-			templateData = {
-
-			'venues' : venues
-
-			}
-			#return jsonify(shopping)
-			return render_template('shopping.html', **templateData)
-
+			return jsonify(results.json['response'])
 	
 		else:
 
 			# Foursquare API request failed somehow
 			return "uhoh, something went wrong %s" % results.json
+
+
+
+
+			
+
+			# Return raw json for demonstration purposes. 
+			# You would likely use this data in your templates or database in a real app
+			
+			#shopping = results.json['response']
+			#venues = shopping.get('venues')
+
+			
+			#templateData = {
+
+			#'venues' : venues
+
+			#}
+			#return jsonify(shopping)
+			#return render_template('main.html', **templateData)
+
+	
+		#else:
+
+			# Foursquare API request failed somehow
+			#return "uhoh, something went wrong %s" % results.json
 
 
 
@@ -210,6 +209,7 @@ def index():
 
 				submitted_image.category = request.form.get('category')
 
+				submitted_image.venue = request.form.get('venue')
                 
 
 
