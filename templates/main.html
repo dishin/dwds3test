@@ -183,9 +183,9 @@ function error(msg) {
 
 
       {# venue - loop through venue and create checkboxes #}
-      {% for c in venue|sort %}
+      {% for v in venue|sort %}
       <label class="checkbox">
-      <input type="checkbox" name="venue" value="{{ c|replace(" ","_") }}" {% if c|replace(" ","_") in form.veune.data %}checked=checked{% endif %} > {{ c|title }}
+      <input type="checkbox" name="venue" value="{{ v|replace(" ","_") }}" {% if c|replace(" ","_") in form.veune.data %}checked=checked{% endif %} > {{ c|title }}
       </label>
       {% endfor %}
 
