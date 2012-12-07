@@ -13,69 +13,22 @@ img {
 
 	
 <div class="row-fluid">
-	<!--<div class="row">-->
-		<div class="span6">
-		    {% if form.errors %}
-		    <ul class="errors">
-		        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-		            {% for error in field_errors %}
-		                <li class="alert alert-error">
-		                	{{ form[field_name].label.text }} - {{ error }}
-		               	</li>
-		            {% endfor %}
-		        {% endfor %}
-		    </ul>
-		    {% endif %}
-
-		    <h2>Share Your Wish Item</h2>
-		    <p></p>
-			<form method="POST" enctype="multipart/form-data">
-				
-				{{ form.title.label }}
-				{{ form.title }}
-
-				{{ form.description.label }}
-				{{ form.description }}
-
-			
-				<br>
-				<!--categories-->
-				<br> 
-				{{ form.category }}
-
-        Where Your Photo Is Taken
-        <br>
-
-        <span id="venueListContainer"></span>
-
-				{{ form.postedby.label }}
-				{{ form.postedby }}
-				<br>
-				{{ form.fileupload.label }}
-				{{ form.fileupload }}
-				<br><br>
-				<input class="btn btn" type="submit" value="upload">
-
-
-			</form>
-		</div>
-
-
-
-
-
 
 
 <!--hml5 geo-->
 
-<div class="span6">
+<div class="span12">
 
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU1fE5CKCqkzAHn61AhCIazqLCnbuWcCw&sensor=false"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU1fE5CKCqkzAHn61AhCIazqLCnbuWcCw&sensor=false"></script>
+
+
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <article>
-      <p>Find Where Your Stuffs Are: <span id="status">checking...</span></p>
+      <p> <span id="status"></span></p>
     </article>
+
+  
 <script src="/static/js/vendor/jquery-1.8.1.min.js"></script>
 
 
@@ -88,7 +41,7 @@ function success(position) {
   $.ajax({
     type : 'GET',
     dataType : 'json',
-  	url: "/fsq", // put foursquare api url here? question for John
+    url: "/fsq", // put foursquare api url here? question for John
     data : { latlng : position.coords.latitude + "," + position.coords.longitude},
 
     success : function(fsqdata) {
@@ -106,8 +59,8 @@ function success(position) {
     }
 
   }).done(function(data) {
-  	// do something with the information here.
-  		//console.log(data);
+    // do something with the information here.
+      //console.log(data);
   })
   if (s.className == 'success') {
     // not sure why we're hitting this twice in FF, I think it's to do with a cached result coming back    
@@ -134,14 +87,14 @@ function buildVenueSelectList(data) {
 
 }
 
- s.innerHTML = "	!";
+ s.innerHTML = " MY LOCATION ";
   s.className = 'success';
   
   var mapcanvas = document.createElement('div');
   mapcanvas.id = 'mapcanvas';
-  mapcanvas.style.height = '400px';
-  mapcanvas.style.width = '560px';
-    
+  mapcanvas.style.height = '300px';
+  mapcanvas.style.width = '100%';
+  mapcanvas.style.position = 'relative';
   document.querySelector('article').appendChild(mapcanvas);
   
   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -168,21 +121,89 @@ function error(msg) {
   
   // console.log(arguments);
 }
-	// immediately on page load, if geolocation exists get the location, send the result to success()
-	if (navigator.geolocation) {
-	  navigator.geolocation.getCurrentPosition(success, error);  
-	} else {
-	  error('not supported');
-	}
+  // immediately on page load, if geolocation exists get the location, send the result to success()
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);  
+  } else {
+    error('not supported');
+  }
 
 });
 </script>
 </div>
 
 
+<!--HTML5 geo-->
 
 
 
+
+
+
+
+
+
+
+
+
+	<!--<div class="row">-->
+		<div class="span12">
+		    {% if form.errors %}
+		    <ul class="errors">
+		        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+		            {% for error in field_errors %}
+		                <li class="alert alert-error">
+		                	{{ form[field_name].label.text }} - {{ error }}
+		               	</li>
+		            {% endfor %}
+		        {% endfor %}
+		    </ul>
+		    {% endif %}
+
+		    <h2>Share Your Wish Item</h2>
+		    <p></p>
+			<form method="POST" enctype="multipart/form-data">
+				
+				{{ form.title.label }}
+				{{ form.title }}
+
+				{{ form.description.label }}
+				{{ form.description }}
+
+			
+				<br>
+				<!--categories-->
+			 
+				<!--{{ form.category }}-->
+
+        Where Your Photo Is Taken
+        <br>
+
+        <span id="venueListContainer"></span>
+
+
+
+				{{ form.postedby.label }}
+				{{ form.postedby }}
+				<br>
+				{{ form.fileupload.label }}
+				{{ form.fileupload }}
+				<br><br>
+				<input class="btn btn" type="submit" value="upload">
+
+
+			</form>
+		</div>
+
+
+
+
+
+
+
+
+
+</div>
 
 
 
