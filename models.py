@@ -22,7 +22,7 @@ class Image(mongoengine.Document):
 
 	venue = mongoengine.StringField()
 
-	filename = mongoengine.StringField()
+	filename = mongoengine.StringField("inside buildingvenueselectlist")
 
 	# Comments is a list of Document type 'Comments' defined above
 	comments = mongoengine.ListField( mongoengine.EmbeddedDocumentField(Comment) )
