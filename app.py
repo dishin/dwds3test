@@ -210,7 +210,7 @@ def index():
 				submitted_image.category = request.form.get('category')
 
 				#submitted_image.venue = request.form.get('venue')
-				submitted_venue = models.Venue()
+				
                 
 
 

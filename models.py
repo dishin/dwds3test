@@ -20,7 +20,7 @@ class Image(mongoengine.Document):
 
 	category = mongoengine.StringField(choices = ( ('ride','Ride'), ('tech','Tech'), ('fashion','Fashion'), ('gear','Gear'), ('place','Place')) )
 
-	venue = mongoengine.StringField(max_length=30)
+	venue = mongoengine.StringField()
 
 	filename = mongoengine.StringField()
 
