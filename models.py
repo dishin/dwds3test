@@ -18,7 +18,7 @@ class Image(mongoengine.Document):
 	
 	# tags = mongoengine.ListField( mongoengine.StringField())
 
-	category = mongoengine.StringField(choices = ( ('ride','Ride'), ('tech','Tech'), ('fashion','Fashion'), ('gear','Gear'), ('place','Place')) )
+	#category = mongoengine.StringField(choices = ( ('ride','Ride'), ('tech','Tech'), ('fashion','Fashion'), ('gear','Gear'), ('place','Place')) )
 
 	venue = mongoengine.StringField()
 
