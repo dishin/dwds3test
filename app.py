@@ -209,7 +209,7 @@ def index():
 
 				#submitted_image.category = request.form.get('category')
 
-				submitted_image.fsqdata.venues = request.form.get('fsqdata.venues')
+				submitted_image.venues = request.form.get('venues')
 				
                 
 
