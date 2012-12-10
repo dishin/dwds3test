@@ -210,9 +210,6 @@ def index():
 				#submitted_image.category = request.form.get('category')
 
 				submitted_image.venues = request.form.get('venues')
-				
-                
-
 
 				submitted_image.postedby = request.form.get('postedby')
 				submitted_image.filename = filename # same filename of s3 bucket file
