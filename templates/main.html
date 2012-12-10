@@ -23,10 +23,10 @@ img {
 
 
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <article>
       <p> <span id="status"></span></p>
-    </article>
+    </article>-->
 
   
 <script src="/static/js/vendor/jquery-1.8.1.min.js"></script>
@@ -41,7 +41,7 @@ function success(position) {
   $.ajax({
     type : 'GET',
     dataType : 'json',
-    url: "/fsq", // put foursquare api url here? question for John
+    url: "/fsq", // I think put foursquare api url here? question for Mr. Schimmel
     data : { latlng : position.coords.latitude + "," + position.coords.longitude},
 
     success : function(fsqdata) {
