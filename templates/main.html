@@ -130,8 +130,8 @@ function error(msg) {
 
 });
 </script>
-</div>
 
+</div>
 
 <!--HTML5 geo-->
 
@@ -147,7 +147,7 @@ function error(msg) {
 
 
 	<!--<div class="row">-->
-		<div class="span12">
+		<!--<div class="span12">-->
 		    {% if form.errors %}
 		    <ul class="errors">
 		        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
@@ -159,7 +159,7 @@ function error(msg) {
 		        {% endfor %}
 		    </ul>
 		    {% endif %}
-
+<p>
 		    <h2>Share Your Wish Item</h2>
 		    <p></p>
 			<form method="POST" enctype="multipart/form-data">
@@ -172,12 +172,14 @@ function error(msg) {
 
 			
 				<br>
+        <br>
 				<!--categories-->
 			 
 				<!--{{ form.category }}-->
 
         Where Your Photo Is Taken
         <br>
+        <p>
 
         <span id="venueListContainer"></span>
 
@@ -194,7 +196,9 @@ function error(msg) {
 
 
 			</form>
-		</div>
+
+      </div>
+		
 
 
 
@@ -202,9 +206,7 @@ function error(msg) {
 
 
 
-
-
-</div>
+<!--</div>-->
 
 
 
@@ -350,14 +352,14 @@ function error(msg) {
 
 <!--like button --> 
 
-		<script>document.getElementById('response').focus()</script>
+		<!--<script>document.getElementById('response').focus()</script>
 			<form method="POST" action="/">
 				<div class="btn-group" style="float:left;">
 				<button type="submit" name="do" value="like" class="btn btn-mini"><i class="icon-heart"></i></button>
 				
 		</form>
 
-		</div>
+		</div>-->
 
 
 <!--like button-->
