@@ -44,8 +44,8 @@ photo_form = model_form(Image)
 # It will have all the fields of the Photo model
 # We are adding in a separate field for the file upload called 'fileupload'
 class photo_upload_form(photo_form):
-	fileupload = FileField('Upload an image file', validators=[])
-
+	#fileupload = FileField('Upload an image file', validators=[])
+fileupload = FileField('Upload an image file')
 
 	
 	
